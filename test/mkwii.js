@@ -2,5 +2,8 @@ const Wiimmfi = require('../')
 
 const mkwii = new Wiimmfi.MKWii()
 
-console.log(mkwii.param)
-console.log(mkwii.getAll('hello among us is cool'))
+async function run(){
+    var res = await mkwii.getRooms()
+    console.log(res)
+}
+run()
