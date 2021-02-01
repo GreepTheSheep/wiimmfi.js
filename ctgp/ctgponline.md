@@ -23,7 +23,7 @@ This class is fetched though web scraping. According to the website, this is ref
 {% endtab %}
 
 {% tab title="Properties" %}
-* stats
+* [stats](ctgponline.md#stats)
   * ctww\_players
   * cd\_players
   * most\_ctww\_players
