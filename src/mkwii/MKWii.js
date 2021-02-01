@@ -2,29 +2,26 @@ const fetch = require('node-fetch')
 const url = require('./httpOptions.js')
 const getData = () => {return fetch(`${url.protocol}://${url.host}/stats/${url.games.find(game=>game.abbr == 'mkw').abbr}${url.json_param}`).then(r=>r.json());}
 
-/**
- * Mario Kart Wii online rooms (from API)
- */
+async function getOptions(){
+    var data = await getData()
+    return data.filter(res=>res.type == 'options')[0];
+}
 class MKWii {
-    /**
-     * Get all data from Wiimmfi's MKWii rooms database
-     * 
-     * @returns Promise { Array }
-     */
-    getAll(){
-        return getData()
-    }
+    constructor(){
+        /**
+         * Get options from Wiimmfi's MKWii rooms database
+         * 
+         * @returns Promise { Object }
+         */
+        this.options = getOptions()
 
-    /**
-     * Get options from Wiimmfi's MKWii rooms database
-     * 
-     * @returns Promise { Object }
-     */
-    async getOptions(){
-        var data = await getData()
-        return data.filter(res=>res.type == 'options')[0];
+        /**
+         * Get all data from Wiimmfi's MKWii rooms database
+         * 
+         * @returns Promise { Array }
+         */
+        this.data = getData()
     }
-
     /**
      * Get all rooms from Wiimmfi's MKWii rooms database
      * 
