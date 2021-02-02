@@ -155,6 +155,7 @@ class CTGPOnline extends EventEmitter{
     }
     /**
      * Get all online rooms
+     * @param {string} type Optional: "CTWW" or "Countdown"
      */
     async getRooms(type){
         var rooms = await getRooms()
