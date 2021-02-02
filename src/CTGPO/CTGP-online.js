@@ -58,7 +58,7 @@ async function getRooms(){
                 playersNb: Number(room[1].substring(0,2).trim()),
                 host_vr: 0,
                 uptime: room[3],
-                uptime_ms: room[3] == "-" ? undefined : ms(room[3]),
+                uptime_ms: room[3] == "-" ? undefined : room[3].includes(':') ? ms(room[3].replace(':', ' hours, ').slice(0,-2)) + ms(room[3].slice(-2) + " minutes") : ms(room[3]),
                 joinable: Boolean(room[4] == 'Yes' ? true : false),
                 players: room[5].split(', ')
             })
@@ -72,7 +72,7 @@ async function getRooms(){
                     playersNb: Number(room[1].substring(0,2).trim()),
                     host_vr:  Number(room[2].substring(0,4).trim()),
                     uptime: room[3],
-                    uptime_ms: room[3] == "-" ? undefined : ms(room[3]),
+                    uptime_ms: room[3] == "-" ? undefined : room[3].includes(':') ? ms(room[3].replace(':', ' hours').slice(0,-2)) + ms(room[3].slice(-2) + " minutes") : ms(room[3]),
                     joinable: Boolean(room[4] == 'Yes' ? true : false),
                     players: room[5].split(', ')
                 })
