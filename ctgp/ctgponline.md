@@ -36,14 +36,41 @@ This class is fetched though web scraping. According to the website, this is ref
 
 {% tab title="Events" %}
 * [roomsUpdate](ctgponline.md#roomsupdate)
+* [playersUpdate](ctgponline.md#playersupdate)
+* [debug](ctgponline.md#debug)
 {% endtab %}
 {% endtabs %}
 
 ## Methods
 
-### .getRooms
+### .getRooms\(`[type]`\)
 
 Get a list of all CTGP rooms at the moment
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Parameter</th>
+      <th style="text-align:left">Type</th>
+      <th style="text-align:left">Optional</th>
+      <th style="text-align:left">Default</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">type</td>
+      <td style="text-align:left">String</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <p>The type of the room: <code>CTWW </code>or <code>Countdown</code>
+        </p>
+        <p>If none is set, it takes any type</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 Returns: `Promise <Array>`
 
@@ -91,4 +118,21 @@ CTGPo.on("roomsUpdate", (oldRooms, newRooms)=>{
     console.log("Rooms list has been updated!", newRooms)
 })
 ```
+
+### playersUpdate
+
+Triggered when a player joins or leaves the server
+
+| parameter | Type | Description |
+| :--- | :--- | :--- |
+| oldPlayers | Array | The old players list |
+| newPlayers | Array | The new players list |
+
+### debug
+
+Emitted when there are a debug message
+
+| parameter | Type | Description |
+| :--- | :--- | :--- |
+| message | String | The debug message |
 
