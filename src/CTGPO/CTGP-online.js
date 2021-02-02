@@ -102,7 +102,14 @@ function chunkArray(myArray, chunk_size){
 }
 
 class CTGPOnline extends EventEmitter{
-    constructor(){
+    /**
+     * Creates an instance for CTGP Online servers
+     * @param {object} options Options for this class, see the documantation
+     * @param {boolean} options.events Default: true, enables or disables listener to get events
+     */
+    constructor(options = {
+        events:true
+    }){
         super();
 
         /** Get the CTGP stats
@@ -144,7 +151,7 @@ class CTGPOnline extends EventEmitter{
             longest_cd_logged: getLiStrValue('Longest ever logged Countdown Room'),
         }
 
-        this._roomListener()
+        if (options.events) this._roomListener()
     }
     /**
      * Get all online rooms
