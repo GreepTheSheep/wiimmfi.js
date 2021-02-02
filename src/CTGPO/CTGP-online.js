@@ -211,10 +211,12 @@ class CTGPOnline extends EventEmitter{
         setInterval(async ()=>{
             var rooms2 = await getRooms()
             if (rooms1.length != rooms2.length){
-                this.emit('roomsUpdate', rooms1, rooms2)
-                rooms1 = rooms2
+                if (rooms1.length != 1 && rooms2.length != 0) this.emit('roomsUpdate', rooms1, rooms2)
+            }
+            rooms1 = rooms2
             }
         }, 1000)
+        }, 10000)
     }
 
 }
