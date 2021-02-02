@@ -168,6 +168,20 @@ class CTGPOnline extends EventEmitter{
         }
         else return rooms 
     }
+    /**
+     * Get all online players
+     */
+    async getPlayers(){
+        var rooms = await getRooms()
+        var players = []
+        rooms.forEach(r=>{
+            if (r.type != undefined){
+                r.players.forEach(p=>{
+                    players.push(p)
+                })
+            }
+        })
+        return players
     }
     /**
      * Get room information
