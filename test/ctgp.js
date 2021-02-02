@@ -2,8 +2,12 @@ const Wiimmfi = require('../')
 
 const CTGPo = new Wiimmfi.CTGPOnline()
 
+CTGPo.on('roomsUpdate', ()=>{
+    console.log('New room!')
+})
+
 async function run(){
-    console.log('CTGP Online stats:')
+    // console.log('CTGP Online stats:')
     console.log('Players on CTWW:', await CTGPo.stats.ctww_players)
     console.log('Players on Countdown:', await CTGPo.stats.cd_players)
     console.log('Most ever players on CTWW:', await CTGPo.stats.most_ctww_players)
