@@ -114,7 +114,7 @@ Triggered when a new room is created or deleted
 Example:
 
 ```javascript
-CTGPo.on("roomsUpdate", (oldRooms, newRooms)=>{
+ctgpOnline.on("roomsUpdate", (oldRooms, newRooms)=>{
     console.log("Rooms list has been updated!", newRooms)
 })
 ```
