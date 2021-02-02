@@ -208,13 +208,20 @@ class CTGPOnline extends EventEmitter{
      */
     async _roomListener(){
         var rooms1 = await getRooms()
+        var players1 = await this.getPlayers()
+
         setInterval(async ()=>{
             var rooms2 = await getRooms()
             if (rooms1.length != rooms2.length){
                 if (rooms1.length != 1 && rooms2.length != 0) this.emit('roomsUpdate', rooms1, rooms2)
             }
             rooms1 = rooms2
+
+            var players2 = await this.getPlayers()
+            if (players1.length != players2.length){
+                if (players1.length != 1 && players2.length != 0) this.emit('playersUpdate', players1, players2)
             }
+            players1 = players2
         }, 10000)
     }
 
