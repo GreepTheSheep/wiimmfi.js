@@ -156,8 +156,17 @@ class CTGPOnline extends EventEmitter{
     /**
      * Get all online rooms
      */
-    getRooms(){
-        return getRooms()
+    async getRooms(type){
+        var rooms = await getRooms()
+        if (type == 'CTWW' || type == 'Countdown') {
+            var rooms_filtered = []
+            rooms.forEach(r=>{
+                if (r.type == type) rooms_filtered.push(r)
+            })
+            return rooms_filtered
+        }
+        else return rooms 
+    }
     }
     /**
      * Get room information
