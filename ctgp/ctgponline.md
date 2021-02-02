@@ -10,7 +10,7 @@ description: >-
 const ctgpOnline = new Wiimmfi.CTGPOnline();
 ```
 
-Access to the room statistics for CTGP
+Access to the room statistics for [CTGP](http://chadsoft.co.uk/)
 
 {% hint style="warning" %}
 This class is fetched though web scraping. According to the website, this is refreshed every 10 seconds, so please use a `setInterval` every 10 seconds to not flood the website. Thanks
