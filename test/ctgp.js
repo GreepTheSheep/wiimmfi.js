@@ -2,8 +2,14 @@ const Wiimmfi = require('../')
 
 const CTGPo = new Wiimmfi.CTGPOnline()
 
-CTGPo.on('roomsUpdate', ()=>{
-    console.log('New room!')
+CTGPo.on('playersUpdate', (oldPlayer, newPlayer)=>{
+    console.log('Player update!',newPlayer.length,'players now!')
+})
+CTGPo.on('roomsUpdate', (oldRooms, newRooms)=>{
+    console.log('Rooms update!',newRooms.length,'rooms now!')
+})
+CTGPo.on('debug', (message)=>{
+    console.log(message)
 })
 
 async function run(){
@@ -17,7 +23,9 @@ async function run(){
     console.log('Longest ever logged CTWW Room:', await CTGPo.stats.longest_ctww_logged)
     console.log('Longest ever logged Countdown Room:', await CTGPo.stats.longest_cd_logged)
     var rooms = await CTGPo.getRooms()
-    console.log('CTGP Rooms:',rooms)
+    console.log('CTGP Rooms:', rooms.length)
+    var players = await CTGPo.getPlayers()
+    console.log('CTGP Players:', players)
 }
 
 run()
