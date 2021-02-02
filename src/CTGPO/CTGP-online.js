@@ -4,7 +4,6 @@ const url = require('./httpOptions.js')
 const getData = () => {return fetch(`${url.protocol}://${url.host}/${url.online}`).then(r=>r.text());}
 const cheerio = require('cheerio');
 const { EventEmitter } = require('events');
-process.stdin.resume();
 
 // Private functions
 async function getLiNbValue(search){
