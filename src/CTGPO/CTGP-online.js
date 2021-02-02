@@ -215,7 +215,6 @@ class CTGPOnline extends EventEmitter{
             }
             rooms1 = rooms2
             }
-        }, 1000)
         }, 10000)
     }
 
