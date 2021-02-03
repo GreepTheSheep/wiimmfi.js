@@ -14,7 +14,7 @@ class CTGP {
         const data = await this._getData("index")
         var links = {}
 
-        Object.entries(data).forEach(entry => {
+        Object.entries(data._links).forEach(entry => {
             const [key, value] = entry;
 
             links[key] = value.href
@@ -31,7 +31,7 @@ class CTGP {
         if (!link || link == "index") return await fetch(this.url + `/${url.index}`).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
         else {
             var links = await this._getLinks()
-            var seletedLink = links.link
+            var seletedLink = links[link]
             if (!seletedLink) throw 'Bad link name, check index'
             else return await fetch(this.url + seletedLink).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
         }
