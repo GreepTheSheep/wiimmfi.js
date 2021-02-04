@@ -16,6 +16,11 @@ Access to the room statistics for CTGP
 This class is fetched though web scraping. According to the website, this is refreshed every 10 seconds, so please use the events. Thanks
 {% endhint %}
 
+| Parameter | Type | Optional | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| options | Object | Yes |  | The options for this class |
+| options.events | Boolean | Yes | true | Enables or disable the listener to get events |
+
 {% tabs %}
 {% tab title="Methods" %}
 * [getRooms](ctgponline.md#getrooms)
