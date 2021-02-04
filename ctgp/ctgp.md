@@ -25,14 +25,20 @@ Delivers Time Attacks leaderboard and players data for CTGP
 {% endtab %}
 
 {% tab title="Properties" %}
-* options
+* [options](ctgp.md#options)
+* [url](ctgp.md#url)
+* [links](ctgp.md#links)
 {% endtab %}
 
 {% tab title="Events" %}
-* cacheUpdate
-* debug
+* [cacheUpdate](ctgp.md#cacheupdate)
+* [debug](ctgp.md#debug)
 {% endtab %}
 {% endtabs %}
+
+## Methods
+
+Coming soon™
 
 ## Properties
 
@@ -40,6 +46,18 @@ Delivers Time Attacks leaderboard and players data for CTGP
 
 Returns this options object  
 Returns `Object`
+
+### url
+
+Returns the API URL
+
+Returns: `String`
+
+### links
+
+Returns an object with all the links included in the API
+
+Returns `Promise<Object>`
 
 ## Events
 
