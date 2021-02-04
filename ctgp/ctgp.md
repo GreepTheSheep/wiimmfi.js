@@ -21,7 +21,7 @@ Delivers Time Attacks leaderboard and players data for CTGP
 
 {% tabs %}
 {% tab title="Methods" %}
-
+* [getLinks](ctgp.md#getlinks)
 {% endtab %}
 
 {% tab title="Properties" %}
@@ -38,7 +38,11 @@ Delivers Time Attacks leaderboard and players data for CTGP
 
 ## Methods
 
-Coming soon™
+### getLinks\(\)
+
+Gets an object with API links to go to.
+
+Returns `Promise<Object>`
 
 ## Properties
 
