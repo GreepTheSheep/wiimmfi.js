@@ -16,10 +16,12 @@ class CTGP extends EventEmitter{
         autoCacheRefresh: 2
     }){
         super()
+
         this.options = options
-
-
+        this.links = this._getLinks()
         this.url = `${url.protocol}://${url.host}`
+
+        /**@private*/
         this.cache = {}
 
         if (options.cache) this._startCache()
@@ -78,7 +80,7 @@ class CTGP extends EventEmitter{
             this.emit('debug', '[Cache] Starting caching for ' + key)
             const data = await this._getData(key)
             this.cache[key] = data
-            this.emit('cache-update', key, data)
+            this.emit('cacheUpdate', key, data)
             this.emit('debug', '[Cache] Caching successful for ' + key)
         });
     }
@@ -96,7 +98,7 @@ class CTGP extends EventEmitter{
                 this.emit('debug', '[Cache] Starting caching for ' + key)
                 const data = await this._getData(key)
                 this.cache[key] = data
-                this.emit('cache-update', key, data)
+                this.emit('cacheUpdate', key, data)
                 this.emit('debug', '[Cache] Caching successful for ' + key)
             }, refreshTimeMin*60*1000)
         });
