@@ -18,7 +18,6 @@ class CTGP extends EventEmitter{
         super()
 
         this.options = options
-        this.links = this._getLinks()
         this.url = `${url.protocol}://${url.host}`
 
         /**@private*/
@@ -31,9 +30,8 @@ class CTGP extends EventEmitter{
     /**
      * Simplify links return
      * @returns {object} All links with their key
-     * @private
      */
-    async _getLinks(){
+    async getLinks(){
         const data = await this._getData("index")
         var links = {}
 
@@ -47,6 +45,40 @@ class CTGP extends EventEmitter{
         return links
     }
 
+    /** 
+     * Gets player data
+     * @param {string} playerName The player (mii) name
+     */
+    async getPlayer(playerName){
+        if (this.cache['players'] == null || !this.cache['players']){
+            if (!this.options.cache) {
+                this.cache['players'] = await this._getData('players')
+                if (!this.cache['players'].players.some(p=>p.miiName == playerName)) throw 'Player not found'
+                return this.cache['players'].players.find(p=>p.miiName == playerName)
+            }
+            else {
+                var players = await this._getData('players')
+                if (!players.players.some(p=>p.miiName == playerName)) throw 'Player not found'
+                return players.players.find(p=>p.miiName == playerName)
+            }
+        }
+    }
+
+    /**
+     * Gets Leaserboard from the player
+     * @param {object} player The player from getPlayer
+     */
+    async getPlayerLeaderboard(player){
+        if (!this.cache.leaderboards) this.cache.leaderboards = {}
+        if (this.cache.leaderboards[player.playerId] == null || !this.cache.leaderboards[player.playerId]){
+            if (!this.options.cache) {
+                this.cache.leaderboards[player.playerId] = await fetch(this.url + player._links.item.href).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
+                return this.cache.leaderboards[player.playerId]
+            }
+            else return await fetch(this.url + player._links.item.href).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
+        }
+    }
+
     /**
      * Gets data from this.url
      * @returns {object} RAW JSON for this API
@@ -55,11 +87,11 @@ class CTGP extends EventEmitter{
     async _getData(link = "index"){
         if (link == "index") return await fetch(this.url + `/${url.index}`).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
         else {
-            var links = await this._getLinks()
+            var links = await this.getLinks()
             var seletedLink = links[link]
             if (!seletedLink) throw 'Bad link name, check index'
-            if (!this.cache[link]){
-                if (this.options.cache) {
+            if (this.cache[link] == null || !this.cache[link]){
+                if (!this.options.cache) {
                     this.cache[link] = await fetch(seletedLink).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
                     return this.cache[link]
                 }
@@ -74,10 +106,11 @@ class CTGP extends EventEmitter{
      * @private
      */
     async _startCache(){
-        var links = await this._getLinks()
+        var links = await this.getLinks()
         Object.entries(links).forEach(async entry => {
             const [key] = entry;
             this.emit('debug', '[Cache] Starting caching for ' + key)
+            this.cache[key] = null
             const data = await this._getData(key)
             this.cache[key] = data
             this.emit('cacheUpdate', key, data)
@@ -91,7 +124,7 @@ class CTGP extends EventEmitter{
      * @private 
      */
     async _autoCache(refreshTimeMin){
-        var links = await this._getLinks()
+        var links = await this.getLinks()
         Object.entries(links).forEach(async entry => {
             const [key] = entry;
             setInterval(async ()=>{
