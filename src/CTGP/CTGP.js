@@ -61,7 +61,7 @@ class CTGP extends EventEmitter{
                 if (!players.players.some(p=>p.miiName == playerName)) throw 'Player not found'
                 return players.players.find(p=>p.miiName == playerName)
             }
-        }
+        } else return this.cache['players'].players.find(p=>p.miiName == playerName)
     }
 
     /**
@@ -76,7 +76,7 @@ class CTGP extends EventEmitter{
                 return this.cache.leaderboards[player.playerId]
             }
             else return await fetch(this.url + player._links.item.href).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
-        }
+        } else return this.cache.leaderboards[player.playerId]
     }
 
     /**
