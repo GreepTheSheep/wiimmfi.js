@@ -15,7 +15,7 @@ async function run(){
     console.log(greep)
     var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
     console.log(track)
-    var track = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Coconut Mall', "shortcut"))
-    console.log(track)
+    var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Coconut Mall', "shortcut"))
+    console.log(track200cc)
 }
 run()
