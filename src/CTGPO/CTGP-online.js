@@ -153,6 +153,7 @@ class CTGPOnline extends EventEmitter{
 
         if (options.events) this._roomListener()
     }
+    
     /**
      * Get all online rooms
      * @param {string} type Optional: "CTWW" or "Countdown"
@@ -226,7 +227,6 @@ class CTGPOnline extends EventEmitter{
             players1 = players2
         }, 10000)
     }
-
 }
 
 module.exports = CTGPOnline
