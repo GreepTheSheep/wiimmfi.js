@@ -20,7 +20,6 @@ This class is fetched though web scraping. According to the website, this is ref
 | :--- | :--- | :--- | :--- | :--- |
 | options | Object | Yes |  | The options for this class |
 | options.events | Boolean | Yes | true | Enables or disable the listener to get events |
-
 {% tabs %}
 {% tab title="Methods" %}
 * [getRooms](ctgponline.md#getrooms)
