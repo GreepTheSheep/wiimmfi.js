@@ -1,6 +1,6 @@
 {
   "name": "wiimmfi.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Dependency that interact with Wiimmfi.de API",
   "main": "src/index.js",
   "scripts": {
