@@ -1,6 +1,6 @@
 const Wiimmfi = require('../')
 
-const CTGPo = new Wiimmfi.CTGPOnline()
+const CTGPo = new Wiimmfi.CTGPOnline({events:false})
 
 CTGPo.on('playersUpdate', (oldPlayer, newPlayer)=>{
     console.log('Player update!',newPlayer.length,'players now!')
