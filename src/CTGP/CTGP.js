@@ -66,7 +66,8 @@ class CTGP extends EventEmitter{
 
     /**
      * Gets Leaserboard from the player
-     * @param {object} player The player from getPlayer
+     * @param {object} player The player from getPlayer()
+     * @returns {Promise<Object>} 
      */
     async getPlayerLeaderboard(player){
         if (!this.cache.leaderboards) this.cache.leaderboards = {}
@@ -77,6 +78,62 @@ class CTGP extends EventEmitter{
             }
             else return await fetch(this.url + player._links.item.href).then(r=>r.text()).then(text=>JSON.parse(text.substring(1)))
         } else return this.cache.leaderboards[player.playerId]
+    }
+
+    /**
+     * Gets simplifed data for a specific track
+     * @param {string} trackName The track Name or track ID (that can be found at https://chadsoft.co.uk/time-trials/leaderboards.html)
+     * @param {string} category Optional: The category ID ("Shortcut", "Glitch", "No-shortcut"), defaults to "no-shortcut"
+     * @returns {Promise<Object>} Track info
+     */
+    async getTrack(trackName, category = "no-shortcut"){
+        var categoryId
+        if (category.toLowerCase() == "shortcut") categoryId = 16
+        else if (category.toLowerCase() == "glitch") categoryId = 1
+        else if (category.toLowerCase() == "no-shortcut") categoryId = 2
+        else throw "Category not found"
+
+        if (this.cache['original-tracks'] == null || !this.cache['original-tracks']){
+            if (!this.options.cache) {
+                this.cache['original-tracks'] = await this._getData('original-tracks')
+                if (!this.cache['original-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+                var track = this.cache['original-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                else return track
+            }
+            else {
+                var leaderboards = await this._getData('original-tracks')
+                if (!leaderboards.leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+                // eslint-disable-next-line no-redeclare
+                var track = leaderboards.leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                else return track
+            }
+        } else {
+            if (!this.cache['original-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+            // eslint-disable-next-line no-redeclare
+            var track = this.cache['original-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+            if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+            else return track
+        }
+    }
+
+    /**
+     * Gets fully leaderboard
+     * @param {object} track The data from getTrack()
+     * @returns {Promise<Object>} The full leaderboard
+     * @example
+     * var track = await CTGP.getFullLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
+     */
+    async getLeaderboard(track){
+        if (!this.cache.trackLeaderboards) this.cache.trackLeaderboards = {}
+        if (this.cache.trackLeaderboards[track.trackId] == null || !this.cache.trackLeaderboards[track.trackId]){
+            if (!this.options.cache) {
+                this.cache.trackLeaderboards[track.trackId] = await fetch(this.url + track._links.item.href).then(r=>r.json())
+                return this.cache.trackLeaderboards[track.trackId]
+            }
+            else return await fetch(this.url + track._links.item.href).then(r=>r.json())
+        } else return this.cache.trackLeaderboards[track.trackId]
     }
 
     /**
