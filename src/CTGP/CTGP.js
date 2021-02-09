@@ -119,11 +119,11 @@ class CTGP extends EventEmitter{
     }
 
     /**
-     * Gets fully leaderboard
+     * Gets full leaderboard
      * @param {object} track The data from getTrack()
      * @returns {Promise<Object>} The full leaderboard
      * @example
-     * var track = await CTGP.getFullLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
+     * var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
      */
     async getLeaderboard(track){
         if (!this.cache.trackLeaderboards) this.cache.trackLeaderboards = {}
@@ -134,6 +134,62 @@ class CTGP extends EventEmitter{
             }
             else return await fetch(this.url + track._links.item.href).then(r=>r.json())
         } else return this.cache.trackLeaderboards[track.trackId]
+    }
+
+    /**
+     * Gets simplifed data for a specific track (200cc category)
+     * @param {string} trackName The track Name or track ID (that can be found at https://chadsoft.co.uk/time-trials/leaderboards-200cc.html)
+     * @param {string} category Optional: The category ID ("Shortcut", "Glitch", "No-shortcut"), defaults to "no-shortcut"
+     * @returns {Promise<Object>} Track info
+     */
+    async getTrack200cc(trackName, category = "no-shortcut"){
+        var categoryId
+        if (category.toLowerCase() == "shortcut") categoryId = 16
+        else if (category.toLowerCase() == "glitch") categoryId = 1
+        else if (category.toLowerCase() == "no-shortcut") categoryId = 2
+        else throw "Category not found"
+
+        if (this.cache['original-tracks-200cc'] == null || !this.cache['original-tracks-200cc']){
+            if (!this.options.cache) {
+                this.cache['original-tracks-200cc'] = await this._getData('original-tracks-200cc')
+                if (!this.cache['original-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+                var track = this.cache['original-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                else return track
+            }
+            else {
+                var leaderboards = await this._getData('original-tracks-200cc')
+                if (!leaderboards.leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+                // eslint-disable-next-line no-redeclare
+                var track = leaderboards.leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                else return track
+            }
+        } else {
+            if (!this.cache['original-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track not found'
+            // eslint-disable-next-line no-redeclare
+            var track = this.cache['original-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+            if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+            else return track
+        }
+    }
+
+    /**
+     * Gets full leaderboard (200cc category)
+     * @param {object} track The data from getTrack200cc()
+     * @returns {Promise<Object>} The full leaderboard
+     * @example
+     * var track = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Mushroom Gorge'))
+     */
+    async getLeaderboard200cc(track){
+        if (!this.cache.trackLeaderboards200) this.cache.trackLeaderboards200 = {}
+        if (this.cache.trackLeaderboards200[track.trackId] == null || !this.cache.trackLeaderboards200[track.trackId]){
+            if (!this.options.cache) {
+                this.cache.trackLeaderboards200[track.trackId] = await fetch(this.url + track._links.item.href).then(r=>r.json())
+                return this.cache.trackLeaderboards[track.trackId]
+            }
+            else return await fetch(this.url + track._links.item.href).then(r=>r.json())
+        } else return this.cache.trackLeaderboards200[track.trackId]
     }
 
     /**
