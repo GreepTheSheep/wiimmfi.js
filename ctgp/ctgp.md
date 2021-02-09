@@ -26,6 +26,8 @@ Delivers Time Attacks leaderboard and players data for CTGP
 * [getPlayerLeaderboard](ctgp.md#getplayerleaderboard-player)
 * [getTrack](ctgp.md#getplayerleaderboard-player)
 * [getLeaderboard](ctgp.md#getleaderboard-track)
+* [getTrack200cc](ctgp.md#gettrack-200-cc-trackname-category)
+* [getLeaderboard200cc](ctgp.md#getleaderboard-200-cc-track)
 {% endtab %}
 
 {% tab title="Properties" %}
@@ -129,6 +131,65 @@ Example:
 
 ```javascript
 var leader = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
+console.log(leader)
+```
+
+Returns `Promise<Object>`
+
+### getTrack200cc\(trackName, \[category\]\)
+
+Gets the data of a specific track on CTGP on 200cc category
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Parameter</th>
+      <th style="text-align:left">Type</th>
+      <th style="text-align:left">Optional</th>
+      <th style="text-align:left">Default</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">trackName</td>
+      <td style="text-align:left">String</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <p>The name or the ID of the track.</p>
+        <p>It takes firstly the name, then the ID</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">category</td>
+      <td style="text-align:left">String</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">no-shortcut</td>
+      <td style="text-align:left">
+        <p>The category type of the track,</p>
+        <p>&quot;no-shortcut&quot;, &quot;shortcut&quot; or &quot;glitch&quot;</p>
+        <p>See the &quot;Categories&quot; section <a href="https://chadsoft.co.uk/time-trials/">here</a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+Returns `Promise<Object>`
+
+### getLeaderboard200cc\(track\)
+
+Gets the leaderboard of a specific track on 200cc category
+
+| Parameter | Type | Optional | Default | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| track | Object | No |  | The specific track to get from [getTrack200cc](ctgp.md#gettrack-200-cc-trackname-category) |
+
+Example:
+
+```javascript
+var leader = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Mushroom Gorge'))
 console.log(leader)
 ```
 

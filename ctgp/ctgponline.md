@@ -20,6 +20,7 @@ This class is fetched though web scraping. According to the website, this is ref
 | :--- | :--- | :--- | :--- | :--- |
 | options | Object | Yes |  | The options for this class |
 | options.events | Boolean | Yes | true | Enables or disable the listener to get events |
+
 {% tabs %}
 {% tab title="Methods" %}
 * [getRooms](ctgponline.md#getrooms)
@@ -68,7 +69,7 @@ Get a list of all CTGP rooms at the moment
       <td style="text-align:left">Yes</td>
       <td style="text-align:left"></td>
       <td style="text-align:left">
-        <p>The type of the room: <code>CTWW </code>or <code>Countdown</code>
+        <p>The type of the room: <code>CTWW</code> or <code>Countdown</code>
         </p>
         <p>If none is set, it takes any type</p>
       </td>
