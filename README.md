@@ -7,6 +7,8 @@
 [![Star](https://img.shields.io/github/stars/GreepTheSheep/wiimmfi.js)](https://github.com/GreepTheSheep/wiimmfi.js/stargazers)
 [![Depfu](https://badges.depfu.com/badges/f104d96f4b56f88d6b5ad51755ed2c70/status.svg)](https://depfu.com)
 
+![Node.js Package](https://github.com/GreepTheSheep/wiimmfi.js/workflows/Node.js%20Package/badge.svg?branch=main)
+![Node.js CI](https://github.com/GreepTheSheep/wiimmfi.js/workflows/Node.js%20CI/badge.svg?branch=main)
 [![Build Status](https://travis-ci.com/GreepTheSheep/wiimmfi.js.svg?branch=main)](https://travis-ci.com/GreepTheSheep/wiimmfi.js)
 [![Depfu](https://badges.depfu.com/badges/f104d96f4b56f88d6b5ad51755ed2c70/count.svg)](https://depfu.com/github/GreepTheSheep/wiimmfi.js?project_id=22266)
 
