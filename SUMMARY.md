@@ -4,6 +4,7 @@
 
 ## Wiimmfi
 
+* [GameStatus](wiimmfi/gamestatus.md)
 * [MKWii](wiimmfi/mkwii.md)
 
 ## CTGP
