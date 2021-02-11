@@ -59,7 +59,7 @@ class GameStatus {
 
             arr.push({
                 ID: t[0],
-                game: t[1].trim(),
+                name: t[1].trim(),
                 status: status,
                 statusInfo: statusInfo ? statusInfo : undefined,
                 profiles: isNaN(Number(t[3])) ? (t[3] == '—' ? null : t[3].trim()) : Number(t[3]),
