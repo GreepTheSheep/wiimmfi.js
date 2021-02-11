@@ -1,5 +1,5 @@
 module.exports = {
     MKWii: require('./wiimmfi/mkwii/MKWii.js'),
-    CTGPOnline : require('./CTGP/CTGPO/CTGP-online.js.js'),
+    CTGPOnline : require('./CTGP/CTGPO/CTGP-online.js'),
     CTGP : require('./CTGP/CTGP.js')
 }
