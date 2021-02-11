@@ -16,4 +16,3 @@
 ## Methods
 
 * [getError](methods/geterror.md)
-
