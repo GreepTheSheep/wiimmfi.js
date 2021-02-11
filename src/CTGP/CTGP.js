@@ -93,27 +93,27 @@ class CTGP extends EventEmitter{
         else if (category.toLowerCase() == "no-shortcut") categoryId = 2
         else throw "Category "+category+" not found"
 
-        if (this.cache['all-tracks'] == null || !this.cache['all-tracks']){
+        if (this.cache['original-tracks'] == null || !this.cache['original-tracks']){
             if (!this.options.cache) {
-                this.cache['all-tracks'] = await this._getData('all-tracks')
-                if (!this.cache['all-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
-                var track = this.cache['all-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                this.cache['original-tracks'] = await this._getData('original-tracks')
+                if (!this.cache['original-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
+                var track = this.cache['original-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
                 else return track
             }
             else {
-                var leaderboards = await this._getData('all-tracks')
+                var leaderboards = await this._getData('original-tracks')
                 if (!leaderboards.leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
                 // eslint-disable-next-line no-redeclare
                 var track = leaderboards.leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
                 else return track
             }
         } else {
-            if (!this.cache['all-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
+            if (!this.cache['original-tracks'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
             // eslint-disable-next-line no-redeclare
-            var track = this.cache['all-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-            if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+            var track = this.cache['original-tracks'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+            if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
             else return track
         }
     }
@@ -149,27 +149,27 @@ class CTGP extends EventEmitter{
         else if (category.toLowerCase() == "no-shortcut") categoryId = 2
         else throw "Category "+category+" not found"
 
-        if (this.cache['all-tracks-200cc'] == null || !this.cache['all-tracks-200cc']){
+        if (this.cache['original-tracks-200cc'] == null || !this.cache['original-tracks-200cc']){
             if (!this.options.cache) {
-                this.cache['all-tracks-200cc'] = await this._getData('all-tracks-200cc')
-                if (!this.cache['all-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
-                var track = this.cache['all-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                this.cache['original-tracks-200cc'] = await this._getData('original-tracks-200cc')
+                if (!this.cache['original-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
+                var track = this.cache['original-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+                if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
                 else return track
             }
             else {
-                var leaderboards = await this._getData('all-tracks-200cc')
+                var leaderboards = await this._getData('original-tracks-200cc')
                 if (!leaderboards.leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
                 // eslint-disable-next-line no-redeclare
                 var track = leaderboards.leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-                if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+                if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
                 else return track
             }
         } else {
-            if (!this.cache['all-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
+            if (!this.cache['original-tracks-200cc'].leaderboards.some(p=>(p.name == trackName || p.trackId == trackName))) throw 'Track '+trackName+' not found'
             // eslint-disable-next-line no-redeclare
-            var track = this.cache['all-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
-            if (categoryId != undefined) return track.find(t=>t.categoryId == categoryId)
+            var track = this.cache['original-tracks-200cc'].leaderboards.filter(p=>(p.name == trackName || p.trackId == trackName))
+            if (track.categoryId) return track.find(t=>t.categoryId == categoryId)
             else return track
         }
     }
