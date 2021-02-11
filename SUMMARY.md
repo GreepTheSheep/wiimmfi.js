@@ -11,3 +11,7 @@
 * [CTGP](ctgp/ctgp.md)
 * [CTGPOnline](ctgp/ctgponline.md)
 
+## Methods
+
+* [getError](methods/geterror.md)
+
