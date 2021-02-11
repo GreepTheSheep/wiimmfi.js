@@ -14,9 +14,9 @@ async function run(){
         console.log(CTGP.url,await CTGP.getLinks())
         var greep = await CTGP.getPlayerLeaderboard(await CTGP.getPlayer('Greep'))
         console.log(greep)
-        var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
+        var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge', "Shortcut"))
         console.log(track)
-        var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Coconut Mall', "shortcut"))
+        var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('E547463BA1B0C48B3DB27002A0623F66F64E707E'))
         console.log(track200cc)
     } catch(e){
         console.error(e)
