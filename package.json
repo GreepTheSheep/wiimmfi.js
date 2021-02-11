@@ -4,7 +4,7 @@
   "description": "Dependency that interact with Wiimmfi.de API",
   "main": "src/index.js",
   "scripts": {
-    "test": "npx eslint . && node test/*.js"
+    "test": "npx eslint . && node -e \"const shell=require('shelljs');const fs=require('fs');fileObjs=fs.readdirSync('./test',{withFileTypes:!0});fileObjs.forEach(file=>{console.log('Testing',file);shell.exec('node ./test/'+file)})\""
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "eslint": "^7.19.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "shelljs": "^0.8.4"
   }
 }
