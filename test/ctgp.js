@@ -10,12 +10,27 @@ CTGP.on('cacheUpdate', async (key)=>{
 })
 
 async function run(){
-    console.log(CTGP.url,await CTGP.getLinks())
-    var greep = await CTGP.getPlayerLeaderboard(await CTGP.getPlayer('Greep'))
-    console.log(greep)
-    var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge'))
-    console.log(track)
-    var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Coconut Mall', "shortcut"))
-    console.log(track200cc)
+    try{
+        console.log(CTGP.url,await CTGP.getLinks())
+
+        var greep = await CTGP.getPlayerLeaderboard(await CTGP.getPlayer('Greep'))
+        console.log(greep)
+
+        var track = await CTGP.getTrack('Mushroom Gorge', "Shortcut")
+        console.log(track)
+
+        var trackLeader = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge', "Shortcut"))
+        console.log(trackLeader)
+
+        var track200cc = await CTGP.getTrack200cc('SM64 Castle Grounds')
+        console.log(track200cc)
+
+        var track200ccLeader = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('SM64 Castle Grounds'))
+        console.log(track200ccLeader)
+    } catch(e){
+        console.error(e)
+        process.exit(1)
+    }
 }
+
 run()
