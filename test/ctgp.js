@@ -1,16 +1,16 @@
-try{
-    const Wiimmfi = require('../')
-    const CTGP = new Wiimmfi.CTGP({autoCache: false})
-    
-    CTGP.on('debug', msg=>{
-        console.log(msg)
-    })
-    
-    CTGP.on('cacheUpdate', async (key)=>{
-        console.log(key, "updated")
-    })
-    
-    async () => {
+const Wiimmfi = require('../')
+const CTGP = new Wiimmfi.CTGP({autoCache: false})
+
+CTGP.on('debug', msg=>{
+    console.log(msg)
+})
+
+CTGP.on('cacheUpdate', async (key)=>{
+    console.log(key, "updated")
+})
+
+async function run(){
+    try{
         console.log(CTGP.url,await CTGP.getLinks())
         var greep = await CTGP.getPlayerLeaderboard(await CTGP.getPlayer('Greep'))
         console.log(greep)
@@ -18,8 +18,10 @@ try{
         console.log(track)
         var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('Coconut Mall', "shortcut"))
         console.log(track200cc)
+    } catch(e){
+        console.error(e)
+        process.exit(1)
     }
-} catch(e){
-    console.error(e)
-    process.exit(1)
 }
+
+run()

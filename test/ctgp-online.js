@@ -1,19 +1,19 @@
-try{
-    const Wiimmfi = require('../')
+const Wiimmfi = require('../')
 
-    const CTGPo = new Wiimmfi.CTGPOnline({events:false})
-    
-    CTGPo.on('playersUpdate', (oldPlayer, newPlayer)=>{
-        console.log('Player update!',newPlayer.length,'players now!')
-    })
-    CTGPo.on('roomsUpdate', (oldRooms, newRooms)=>{
-        console.log('Rooms update!',newRooms.length,'rooms now!')
-    })
-    CTGPo.on('debug', (message)=>{
-        console.log(message)
-    })
-    
-    async () =>{
+const CTGPo = new Wiimmfi.CTGPOnline({events:false})
+
+CTGPo.on('playersUpdate', (oldPlayer, newPlayer)=>{
+    console.log('Player update!',newPlayer.length,'players now!')
+})
+CTGPo.on('roomsUpdate', (oldRooms, newRooms)=>{
+    console.log('Rooms update!',newRooms.length,'rooms now!')
+})
+CTGPo.on('debug', (message)=>{
+    console.log(message)
+})
+
+async function run(){
+    try{
         // console.log('CTGP Online stats:')
         console.log('Players on CTWW:', await CTGPo.stats.ctww_players)
         console.log('Players on Countdown:', await CTGPo.stats.cd_players)
@@ -27,8 +27,10 @@ try{
         console.log('CTGP Rooms:', rooms.length)
         var players = await CTGPo.getPlayers()
         console.log('CTGP Players:', players)
+    } catch (e){
+        console.error(e)
+        process.exit(1)
     }
-} catch (e){
-    console.error(e)
-    process.exit(1)
 }
+
+run()

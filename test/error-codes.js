@@ -1,7 +1,7 @@
-try{
-    const Wiimmfi = require('../')
+const Wiimmfi = require('../')
 
-    async () =>{
+async function run(){
+    try{
         var error_codes = [
             45245,
             31009,
@@ -25,8 +25,10 @@ try{
                 console.log('')
             })
         })
+    } catch(e){
+        console.error(e)
+        process.exit(1)
     }
-} catch(e){
-    console.error(e)
-    process.exit(1)
 }
+
+run()
