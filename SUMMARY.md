@@ -6,6 +6,7 @@
 
 * [GameStatus](wiimmfi/gamestatus.md)
 * [MKWii](wiimmfi/mkwii.md)
+* [Competitions](wiimmfi/competitions.md)
 
 ## CTGP
 

@@ -14,11 +14,11 @@ This class is used though web scraping, be careful to not abuse it!
 
 {% tabs %}
 {% tab title="Methods" %}
-* getAllGames\(\)
+* [getAllGames\(\)](gamestatus.md#getallgames)
 {% endtab %}
 
 {% tab title="Properties" %}
-* url
+* [url](gamestatus.md#url)
 {% endtab %}
 {% endtabs %}
 
