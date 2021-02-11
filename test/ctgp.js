@@ -16,7 +16,7 @@ async function run(){
         console.log(greep)
         var track = await CTGP.getLeaderboard(await CTGP.getTrack('Mushroom Gorge', "Shortcut"))
         console.log(track)
-        var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('E547463BA1B0C48B3DB27002A0623F66F64E707E'))
+        var track200cc = await CTGP.getLeaderboard200cc(await CTGP.getTrack200cc('SM64 Castle Grounds'))
         console.log(track200cc)
     } catch(e){
         console.error(e)
